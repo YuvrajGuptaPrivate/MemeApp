@@ -45,9 +45,12 @@ class MainActivity : AppCompatActivity() {
                     val totalItemCount = lm.itemCount
                     val lastVisibleItem = lm.findLastVisibleItemPosition()
 
-                    if (lastVisibleItem == totalItemCount - 3) {
-                        viewmodel.nextMeme()
-                    }
+                        if (lastVisibleItem == totalItemCount - 3) {
+                            if (viewmodel.isloading == false){
+                                viewmodel.nextMeme()
+                            }
+                        }
+
                 }
             })
 

@@ -14,8 +14,11 @@ class Vm : ViewModel() {
     private lateinit var apiInterface : MemeFromInternet
 
     private var _name = MutableLiveData<MemeUiState>()
-
     val name: LiveData<MemeUiState> = _name
+
+
+
+    var isloading : Boolean = false
 
 
      fun loadMeme(){
@@ -37,6 +40,8 @@ class Vm : ViewModel() {
 
         viewModelScope.launch{
             //_name.value = MemeUiState(memes = emptyList(),isLoading = true)
+            isloading = true
+
             try{
                 val result = apiInterface.getMeme()
 
@@ -44,8 +49,13 @@ class Vm : ViewModel() {
 
                 val combinedMemes = currentMemes + result.memes
 
+                isloading = false
+
                 _name.value = MemeUiState(memes = combinedMemes, isLoading = false)
+
             }catch (e: Exception){
+                isloading = false
+
                 _name.value = MemeUiState(error = e.message ?:"Error errror", memes = emptyList(), isLoading = false)
             }
 

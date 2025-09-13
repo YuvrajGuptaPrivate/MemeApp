@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.memeapp.data.model.MEME
 import com.example.memeapp.databinding.MemeBinding
+import com.example.memeapp.databinding.MemeloaderBinding
 import kotlinx.coroutines.withContext
 
 class MYAdapter(memeList: List<MEME>) : RecyclerView.Adapter<MyViewHolder>(){
@@ -19,7 +20,7 @@ class MYAdapter(memeList: List<MEME>) : RecyclerView.Adapter<MyViewHolder>(){
     ): MyViewHolder {
 
         val binding = MemeBinding.inflate(LayoutInflater.from(parent.context),parent ,false)
-       return MyViewHolder(binding)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(
@@ -35,8 +36,13 @@ class MYAdapter(memeList: List<MEME>) : RecyclerView.Adapter<MyViewHolder>(){
     override fun getItemCount(): Int = memes.size
 
     fun updatelist(newlist : List<MEME>){
-        memes = newlist
-        notifyDataSetChanged()
+       // memes = newlist
+      //  notifyDataSetChanged()
+
+        val oldSize = memes.size
+        memes += newlist
+        notifyItemRangeInserted(oldSize, newlist.size)
+
     }
 
 }
@@ -44,3 +50,5 @@ class MYAdapter(memeList: List<MEME>) : RecyclerView.Adapter<MyViewHolder>(){
 
 
 class MyViewHolder(val binding: MemeBinding) : RecyclerView.ViewHolder(binding.root)
+
+class MyMemeloader(val binding: MemeloaderBinding) : RecyclerView.ViewHolder(binding.root)
