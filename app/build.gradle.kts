@@ -42,11 +42,22 @@ android {
 dependencies {
 
     val lifecycle_version = "2.9.3"
+    implementation("com.github.bumptech.glide:glide:5.0.4")
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 
+    kapt ("com.github.bumptech.glide:compiler:5.0.4")
+
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
+
+    implementation("com.squareup.okhttp3:okhttp:5.1.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.1.0")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -56,11 +67,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.github.bumptech.glide:glide:5.0.4")
-    implementation("com.squareup.retrofit2:retrofit:3.0.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 
-    kapt ("com.github.bumptech.glide:compiler:5.0.4")
-    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
 
 }

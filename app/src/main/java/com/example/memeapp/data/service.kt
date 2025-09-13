@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface MemeFromInternet{
 
-    @GET("gimme/50")
+    @GET("gimme/10")
     suspend fun getMeme(): ApiResponse
 }

@@ -11,8 +11,9 @@ import kotlinx.coroutines.launch
 
 class Vm : ViewModel() {
 
-    private val _name = MutableLiveData<MemeUiState>()
     private lateinit var apiInterface : MemeFromInternet
+
+    private var _name = MutableLiveData<MemeUiState>()
 
     val name: LiveData<MemeUiState> = _name
 
@@ -30,6 +31,26 @@ class Vm : ViewModel() {
             }
 
         }
+    }
+
+    fun nextMeme(){
+
+        viewModelScope.launch{
+            //_name.value = MemeUiState(memes = emptyList(),isLoading = true)
+            try{
+                val result = apiInterface.getMeme()
+
+                val currentMemes = _name.value?.memes ?: emptyList()
+
+                val combinedMemes = currentMemes + result.memes
+
+                _name.value = MemeUiState(memes = combinedMemes, isLoading = false)
+            }catch (e: Exception){
+                _name.value = MemeUiState(error = e.message ?:"Error errror", memes = emptyList(), isLoading = false)
+            }
+
+        }
+
     }
 
 

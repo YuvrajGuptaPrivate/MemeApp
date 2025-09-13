@@ -36,6 +36,21 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
+
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val lm = recyclerView.layoutManager as LinearLayoutManager
+                    val totalItemCount = lm.itemCount
+                    val lastVisibleItem = lm.findLastVisibleItemPosition()
+
+                    if (lastVisibleItem == totalItemCount - 3) {
+                        viewmodel.nextMeme()
+                    }
+                }
+            })
+
         }
 
 
@@ -44,6 +59,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewmodel.loadMeme()
+
+
 
 
 
